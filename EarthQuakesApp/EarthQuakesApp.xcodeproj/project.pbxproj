@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		516406E72B45D0EC00A9803D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516406E62B45D0EC00A9803D /* LoginView.swift */; };
+		516406E92B45DEC800A9803D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516406E82B45DEC800A9803D /* LoginViewController.swift */; };
 		51674F4D2B2DFA4F00A283FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51674F4C2B2DFA4F00A283FD /* AppDelegate.swift */; };
 		51674F4F2B2DFA4F00A283FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51674F4E2B2DFA4F00A283FD /* SceneDelegate.swift */; };
 		51674F512B2DFA4F00A283FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51674F502B2DFA4F00A283FD /* ViewController.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		516406E62B45D0EC00A9803D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		516406E82B45DEC800A9803D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		51674F492B2DFA4F00A283FD /* EarthQuakesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthQuakesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51674F4C2B2DFA4F00A283FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51674F4E2B2DFA4F00A283FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +80,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		516406E32B45CFA300A9803D /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				516406E52B45CFC800A9803D /* Login */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		516406E42B45CFAB00A9803D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				51674F522B2DFA4F00A283FD /* Main.storyboard */,
+				51674F572B2DFA5100A283FD /* LaunchScreen.storyboard */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		516406E52B45CFC800A9803D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				516406E62B45D0EC00A9803D /* LoginView.swift */,
+				516406E82B45DEC800A9803D /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		51674F402B2DFA4F00A283FD = {
 			isa = PBXGroup;
 			children = (
@@ -99,12 +129,12 @@
 		51674F4B2B2DFA4F00A283FD /* EarthQuakesApp */ = {
 			isa = PBXGroup;
 			children = (
+				516406E42B45CFAB00A9803D /* Other */,
+				516406E32B45CFA300A9803D /* Screen */,
 				51674F4C2B2DFA4F00A283FD /* AppDelegate.swift */,
 				51674F4E2B2DFA4F00A283FD /* SceneDelegate.swift */,
 				51674F502B2DFA4F00A283FD /* ViewController.swift */,
-				51674F522B2DFA4F00A283FD /* Main.storyboard */,
 				51674F552B2DFA5100A283FD /* Assets.xcassets */,
-				51674F572B2DFA5100A283FD /* LaunchScreen.storyboard */,
 				51674F5A2B2DFA5100A283FD /* Info.plist */,
 			);
 			path = EarthQuakesApp;
@@ -260,6 +290,8 @@
 			files = (
 				51674F512B2DFA4F00A283FD /* ViewController.swift in Sources */,
 				51674F4D2B2DFA4F00A283FD /* AppDelegate.swift in Sources */,
+				516406E72B45D0EC00A9803D /* LoginView.swift in Sources */,
+				516406E92B45DEC800A9803D /* LoginViewController.swift in Sources */,
 				51674F4F2B2DFA4F00A283FD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
