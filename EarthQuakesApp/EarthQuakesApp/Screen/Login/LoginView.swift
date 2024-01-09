@@ -43,14 +43,17 @@ class LoginView: UIView {
 extension LoginView {
     
     private func buildViewHierarchy() {
-        addSubview(userLabel)
-        // addSubview(userTextField)
+        [userLabel, userTextField].forEach(addSubview)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            userLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            userLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            userLabel.bottomAnchor.constraint(equalTo: userTextField.topAnchor, constant: -32),
+            userLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            userLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            userTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+            userTextField.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }
