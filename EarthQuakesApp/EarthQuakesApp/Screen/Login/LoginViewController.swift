@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         let fakePass = "123456"
         
         if user == fakeUser && password == fakePass {
-           print("LOGIN")
+            
         } else {
             print("NO LOGIN")
         }
@@ -53,7 +53,8 @@ extension LoginViewController {
 
 extension LoginViewController: LoginDelegate {
     func didTapCreateAccount() {
-        print("registrar usuario")
+        let controller = RegisterUserViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func didTapLoginContinue(user: String, pass: String) {
