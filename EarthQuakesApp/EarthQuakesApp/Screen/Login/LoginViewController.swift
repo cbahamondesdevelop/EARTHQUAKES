@@ -10,11 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    //private var controllerModel: String
-    
-    private var loginView: LoginView = {
+    private lazy var loginView: LoginView = {
         let view = LoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.delegate = self
         return view
     }()
     
@@ -23,23 +22,22 @@ class LoginViewController: UIViewController {
         buildViewHierarchy()
         setupConstraints()
     }
-    /*
-    init(controllerModel: String) {
-        self.controllerModel = controllerModel
-        super.init(nibName: nil, bundle: nil)
-        buildViewHierarchy()
-        setupConstraints()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func makeLogin(user: String, password: String) {
+        let fakeUser = "Cristian"
+        let fakePass = "123456"
+        
+        if user == fakeUser && password == fakePass {
+           print("LOGIN")
+        } else {
+            print("NO LOGIN")
+        }
     }
-     */
 }
 
 extension LoginViewController {
     func buildViewHierarchy() {
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = .white
         view.addSubview(loginView)
     }
     
@@ -50,5 +48,15 @@ extension LoginViewController {
             loginView.topAnchor.constraint(equalTo: view.topAnchor),
             loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+extension LoginViewController: LoginDelegate {
+    func didTapCreateAccount() {
+        print("registrar usuario")
+    }
+    
+    func didTapLoginContinue(user: String, pass: String) {
+        makeLogin(user: user, password: pass)
     }
 }
