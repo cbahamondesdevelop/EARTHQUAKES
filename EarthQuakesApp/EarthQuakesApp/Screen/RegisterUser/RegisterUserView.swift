@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
+protocol RegisterUserViewDelegate: AnyObject {
+    func didTapCreateAccount()
+}
+
 class RegisterUserView: UIView {
     
     let textAPP = TextsInTheApp()
+    weak var delegate: RegisterUserViewDelegate?
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -112,14 +117,14 @@ class RegisterUserView: UIView {
         return textField
     }()
     
-    private lazy var loginButton: UIButton = {
+    private lazy var createAccountButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .red
         button.layer.cornerRadius = 5.0
         button.isEnabled = true
         button.setTitle(textAPP.createAccount, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        // button.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
         return button
     }()
     
@@ -148,7 +153,7 @@ extension RegisterUserView {
          repeatPassTextField,
          emailLabel,
          emailTextField,
-         loginButton].forEach(addSubview)
+         createAccountButton].forEach(addSubview)
     }
     
     private func setupConstraints() {
@@ -167,11 +172,38 @@ extension RegisterUserView {
             lastNameTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             lastNameTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
+            passwordLabel.topAnchor.constraint(equalTo: lastNameTextField.bottomAnchor, constant: 20),
+            passwordLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+                        
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 10),
+            passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            loginButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -60),
-            loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            loginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            loginButton.heightAnchor.constraint(equalToConstant: 40)
+            repeatPassLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
+            repeatPassLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+                        
+            repeatPassTextField.topAnchor.constraint(equalTo: repeatPassLabel.bottomAnchor, constant: 10),
+            repeatPassTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            repeatPassTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            
+            emailLabel.topAnchor.constraint(equalTo: repeatPassTextField.bottomAnchor, constant: 20),
+            emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+                        
+            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 10),
+            emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+
+            createAccountButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -60),
+            createAccountButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            createAccountButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            createAccountButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+}
+
+extension RegisterUserView {
+    @objc
+    func didTapRegister(){
+        delegate?.didTapCreateAccount()
     }
 }
