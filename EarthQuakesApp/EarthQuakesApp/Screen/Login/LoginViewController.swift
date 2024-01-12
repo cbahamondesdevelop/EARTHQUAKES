@@ -10,6 +10,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    let textAPP = TextsInTheApp()
+    
     private lazy var loginView: LoginView = {
         let view = LoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -25,13 +27,22 @@ class LoginViewController: UIViewController {
     
     func makeLogin(user: String, password: String) {
         let fakeUser = "Cristian"
-        let fakePass = "123456"
+        let fakePass = "1234"
         
         if user == fakeUser && password == fakePass {
-            
+            let controller = HomeViewController()
+            //navigationController?.pushViewController(controller, animated: true)
+            controller.modalPresentationStyle = .fullScreen
+            present(controller, animated: true)
         } else {
-            print("NO LOGIN")
+            showAlert()
         }
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: textAPP.titleAlert, message: textAPP.alertContent, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: textAPP.iAgree, style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert,animated: true, completion: nil)
     }
 }
 
