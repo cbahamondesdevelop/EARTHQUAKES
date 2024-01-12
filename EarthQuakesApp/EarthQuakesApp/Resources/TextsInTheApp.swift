@@ -19,6 +19,7 @@ class TextsInTheApp {
     let search = "Buscar"
     let alertContent = "Usuario o contraseña no coinciden"
     let iAgree = "De acuerdo"
+    let emptyLocation = "No reportado"
     
     //MARK: Button
     let titleButton = "Ingresar"
@@ -34,4 +35,7 @@ class TextsInTheApp {
     let magnitudeLabelCell = "Magnitud: "
     let depthLabelCell = "Profundidad: "
     let locationLabelCell = "Lugar: "
+    
+    //MARK: Default
+    let emptyDefault = ""
 }

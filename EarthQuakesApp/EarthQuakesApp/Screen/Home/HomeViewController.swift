@@ -10,10 +10,11 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    private var viewModel: EarthquakeDataResponse
+    
     private lazy var homeView: HomeView = {
-        let view = HomeView()
+        let view = HomeView(viewModel: viewModel)
         view.translatesAutoresizingMaskIntoConstraints = false
-        // view.delegate = self
         return view
     }()
     
@@ -21,6 +22,16 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         buildViewHierarchy()
         setupConstraints()
+    }
+    
+    init(viewModel: EarthquakeDataResponse) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        print(viewModel)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

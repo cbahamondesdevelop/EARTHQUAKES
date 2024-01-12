@@ -11,29 +11,28 @@ import UIKit
 class HomeView: UIView {
     
     let textAPP = TextsInTheApp()
+    var viewModel: EarthquakeDataResponse
     
     private lazy var searchBarView: SearchHeaderView = {
         let view = SearchHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        // view.delegate = self
         return view
     }()
     
     private lazy var earthQuakeListView: EarthQuakeListView = {
-        let view = EarthQuakeListView()
+        let view = EarthQuakeListView(viewModel: viewModel)
         view.translatesAutoresizingMaskIntoConstraints = false
-        // view.delegate = self
         return view
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+
+    init(viewModel: EarthquakeDataResponse){
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         buildViewHierarchy()
         setupConstraints()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
