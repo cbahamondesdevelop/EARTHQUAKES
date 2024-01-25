@@ -8,19 +8,10 @@
 import Foundation
 import UIKit
 
-struct Earthquake {
-    let title: String
-    let magnitude: Double
-    let depth: Double
-    let location: String
-}
-
 class EarthQuakeListView: UIView {
     
     let textAPP = TextsInTheApp()
-    
-    var data: [Earthquake] = [Earthquake(title: "Terremoto1", magnitude: 3.4, depth: 5.0, location: "Valdivia"),
-                              Earthquake(title: "Terremoto2", magnitude: 2.2, depth: 3.0, location: "Osorno")]
+    let viewModel: EarthquakeDataResponse
     
     private lazy var earthTableView: UITableView = {
         let table = UITableView()
@@ -29,17 +20,18 @@ class EarthQuakeListView: UIView {
         table.delegate = self
         return table
     }()
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: EarthquakeDataResponse){
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         buildViewHierarchy()
         setupConstraints()
         
         earthTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "myCustomCell")
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -61,7 +53,7 @@ extension EarthQuakeListView {
 
 extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return viewModel.features.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -73,21 +65,20 @@ extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
             fatalError("Error in TableView")
         }
         
-        let earthquake = data[indexPath.row]
-        cell.titleLabel.text = "\(textAPP.titleLabelCell)\(earthquake.title)"
-        cell.magnitudeLabel.text = "\(textAPP.magnitudeLabelCell)\(earthquake.magnitude)"
-        cell.depthLabel.text = "\(textAPP.depthLabelCell)\(earthquake.depth)"
-        cell.locationLabel.text = "\(textAPP.locationLabelCell)\(earthquake.location)"
+        let earthquake = viewModel.features[indexPath.row]
+        cell.titleLabel.text = "\(textAPP.titleLabelCell)\(earthquake.properties.title)"
+        cell.magnitudeLabel.text = "\(textAPP.magnitudeLabelCell)\(earthquake.properties.mag ?? 0)"
+        cell.depthLabel.text = "\(textAPP.depthLabelCell)\("earthquake.depth")"
+        cell.locationLabel.text = "\(textAPP.locationLabelCell)\(earthquake.properties.place ?? textAPP.emptyLocation)"
         
         cell.detailButton.setTitle(textAPP.detailButton, for: .normal)
         cell.detailButton.setTitleColor(.systemBlue, for: .normal)
-        // cell.detailButton.addTarget(self, action: #selector(didTapDetail(_:)), for: .touchUpInside)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectItem = data[indexPath.row]
-        print("Detalle del terremoto: \(selectItem.title)")
+        let selectItem = viewModel.features[indexPath.row]
+        print("Detalle del terremoto: \(selectItem.properties.title)")
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     let textAPP = TextsInTheApp()
+    let provider = Provider()
     
     private lazy var loginView: LoginView = {
         let view = LoginView()
@@ -30,10 +31,18 @@ class LoginViewController: UIViewController {
         let fakePass = "1234"
         
         if user == fakeUser && password == fakePass {
-            let controller = HomeViewController()
-            //navigationController?.pushViewController(controller, animated: true)
-            controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: true)
+            
+            provider.fetchDataFromAPI { result in
+                switch result {
+                case .success(let response):
+                    let controller = HomeViewController(viewModel: response)
+                    controller.modalPresentationStyle = .fullScreen
+                    self.present(controller, animated: true)
+                case .failure(let error):
+                    print("error \(error)")
+                }
+            }
+            
         } else {
             showAlert()
         }

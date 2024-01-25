@@ -42,6 +42,6 @@ extension RegisterUserViewController {
 
 extension RegisterUserViewController: RegisterUserViewDelegate {
     func didTapCreateAccount() {
-        print("presione crear cuenta")
+        // will be implemented in the near future
     }
 }
