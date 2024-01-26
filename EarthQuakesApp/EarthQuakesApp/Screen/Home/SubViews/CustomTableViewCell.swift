@@ -13,6 +13,15 @@ class CustomTableViewCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .purple
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var subTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
     
@@ -54,22 +63,27 @@ class CustomTableViewCell: UITableViewCell {
 extension CustomTableViewCell {
     
     private func buildViewHierarchy() {
-        [titleLabel, magnitudeLabel, depthLabel, locationLabel, detailButton].forEach(addSubview)
+        [titleLabel, subTitleLabel, magnitudeLabel, depthLabel, locationLabel, detailButton].forEach(addSubview)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 7),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             
-            magnitudeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
+            subTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            
+            magnitudeLabel.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 15),
             magnitudeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             
-            depthLabel.topAnchor.constraint(equalTo: magnitudeLabel.bottomAnchor, constant: 4),
+            depthLabel.topAnchor.constraint(equalTo: magnitudeLabel.bottomAnchor, constant: 7),
             depthLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             
-            locationLabel.topAnchor.constraint(equalTo: depthLabel.bottomAnchor, constant: 4),
+            locationLabel.topAnchor.constraint(equalTo: depthLabel.bottomAnchor, constant: 7),
             locationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            //locationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 7),
             
             detailButton.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             detailButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),

@@ -8,10 +8,15 @@
 import Foundation
 import UIKit
 
+protocol EarthQuakeListViewDelegate: AnyObject {
+    func didTapDetail(detail: FeaturesStruct)
+}
+
 class EarthQuakeListView: UIView {
     
     let textAPP = TextsInTheApp()
     let viewModel: EarthquakeDataResponse
+    weak var delegate: EarthQuakeListViewDelegate?
     
     private lazy var earthTableView: UITableView = {
         let table = UITableView()
@@ -57,7 +62,7 @@ extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120.0
+        return 150.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,9 +71,10 @@ extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
         }
         
         let earthquake = viewModel.features[indexPath.row]
-        cell.titleLabel.text = "\(textAPP.titleLabelCell)\(earthquake.properties.title)"
+        cell.titleLabel.text = textAPP.titleLabelCell
+        cell.subTitleLabel.text = earthquake.properties.title
         cell.magnitudeLabel.text = "\(textAPP.magnitudeLabelCell)\(earthquake.properties.mag ?? 0)"
-        cell.depthLabel.text = "\(textAPP.depthLabelCell)\("earthquake.depth")"
+        cell.depthLabel.text = "\(textAPP.depthLabelCell)\(earthquake.geometry.coordinates[2])"
         cell.locationLabel.text = "\(textAPP.locationLabelCell)\(earthquake.properties.place ?? textAPP.emptyLocation)"
         
         cell.detailButton.setTitle(textAPP.detailButton, for: .normal)
@@ -79,6 +85,6 @@ extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectItem = viewModel.features[indexPath.row]
-        print("Detalle del terremoto: \(selectItem.properties.title)")
+        delegate?.didTapDetail(detail: selectItem)
     }
 }
