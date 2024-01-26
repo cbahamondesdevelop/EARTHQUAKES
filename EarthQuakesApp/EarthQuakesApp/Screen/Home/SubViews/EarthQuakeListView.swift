@@ -71,7 +71,8 @@ extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
         }
         
         let earthquake = viewModel.features[indexPath.row]
-        cell.titleLabel.text = "\(textAPP.titleLabelCell)\n\(earthquake.properties.title)"
+        cell.titleLabel.text = textAPP.titleLabelCell
+        cell.subTitleLabel.text = earthquake.properties.title
         cell.magnitudeLabel.text = "\(textAPP.magnitudeLabelCell)\(earthquake.properties.mag ?? 0)"
         cell.depthLabel.text = "\(textAPP.depthLabelCell)\(earthquake.geometry.coordinates[2])"
         cell.locationLabel.text = "\(textAPP.locationLabelCell)\(earthquake.properties.place ?? textAPP.emptyLocation)"

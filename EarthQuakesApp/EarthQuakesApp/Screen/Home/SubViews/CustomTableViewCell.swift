@@ -18,6 +18,13 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
     
+    lazy var subTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
+    }()
+    
     lazy var magnitudeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +63,7 @@ class CustomTableViewCell: UITableViewCell {
 extension CustomTableViewCell {
     
     private func buildViewHierarchy() {
-        [titleLabel, magnitudeLabel, depthLabel, locationLabel, detailButton].forEach(addSubview)
+        [titleLabel, subTitleLabel, magnitudeLabel, depthLabel, locationLabel, detailButton].forEach(addSubview)
     }
     
     private func setupConstraints() {
@@ -65,7 +72,10 @@ extension CustomTableViewCell {
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             
-            magnitudeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
+            subTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            
+            magnitudeLabel.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 15),
             magnitudeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             
             depthLabel.topAnchor.constraint(equalTo: magnitudeLabel.bottomAnchor, constant: 7),
