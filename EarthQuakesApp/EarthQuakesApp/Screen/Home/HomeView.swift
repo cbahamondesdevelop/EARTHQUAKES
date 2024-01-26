@@ -8,10 +8,15 @@
 import Foundation
 import UIKit
 
+protocol HomeViewDelegate: AnyObject {
+    func didTapDetail(detail: FeaturesStruct)
+}
+
 class HomeView: UIView {
     
     let textAPP = TextsInTheApp()
     var viewModel: EarthquakeDataResponse
+    weak var delegate: HomeViewDelegate?
     
     private lazy var searchBarView: SearchHeaderView = {
         let view = SearchHeaderView()
@@ -21,6 +26,7 @@ class HomeView: UIView {
     
     private lazy var earthQuakeListView: EarthQuakeListView = {
         let view = EarthQuakeListView(viewModel: viewModel)
+        view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -54,5 +60,11 @@ extension HomeView {
             earthQuakeListView.topAnchor.constraint(equalTo: searchBarView.topAnchor, constant: 110),
             earthQuakeListView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+}
+
+extension HomeView: EarthQuakeListViewDelegate {
+    func didTapDetail(detail: FeaturesStruct) {
+        delegate?.didTapDetail(detail: detail)
     }
 }

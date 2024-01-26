@@ -29,6 +29,8 @@
 		51674F642B2DFA5100A283FD /* EarthQuakesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51674F632B2DFA5100A283FD /* EarthQuakesAppTests.swift */; };
 		51674F6E2B2DFA5100A283FD /* EarthQuakesAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51674F6D2B2DFA5100A283FD /* EarthQuakesAppUITests.swift */; };
 		51674F702B2DFA5100A283FD /* EarthQuakesAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51674F6F2B2DFA5100A283FD /* EarthQuakesAppUITestsLaunchTests.swift */; };
+		5195F2102B62D3F400032804 /* EarthQuakesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5195F20F2B62D3F400032804 /* EarthQuakesDetailView.swift */; };
+		5195F2122B62D7AF00032804 /* EarthQuakesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5195F2112B62D7AF00032804 /* EarthQuakesDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		51674F692B2DFA5100A283FD /* EarthQuakesAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthQuakesAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51674F6D2B2DFA5100A283FD /* EarthQuakesAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthQuakesAppUITests.swift; sourceTree = "<group>"; };
 		51674F6F2B2DFA5100A283FD /* EarthQuakesAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthQuakesAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5195F20F2B62D3F400032804 /* EarthQuakesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthQuakesDetailView.swift; sourceTree = "<group>"; };
+		5195F2112B62D7AF00032804 /* EarthQuakesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthQuakesDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,8 @@
 		516406F02B4F30C600A9803D /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				5195F20F2B62D3F400032804 /* EarthQuakesDetailView.swift */,
+				5195F2112B62D7AF00032804 /* EarthQuakesDetailViewController.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -384,9 +390,11 @@
 			files = (
 				51674F512B2DFA4F00A283FD /* ViewController.swift in Sources */,
 				516406F22B5028E500A9803D /* RegisterUserView.swift in Sources */,
+				5195F2102B62D3F400032804 /* EarthQuakesDetailView.swift in Sources */,
 				516407052B517EBA00A9803D /* Provider.swift in Sources */,
 				516406ED2B4DCB4300A9803D /* TextsInTheApp.swift in Sources */,
 				516406F92B506DDA00A9803D /* HomeView.swift in Sources */,
+				5195F2122B62D7AF00032804 /* EarthQuakesDetailViewController.swift in Sources */,
 				51674F4D2B2DFA4F00A283FD /* AppDelegate.swift in Sources */,
 				516406F42B50594900A9803D /* RegisterUserViewController.swift in Sources */,
 				516406E72B45D0EC00A9803D /* LoginView.swift in Sources */,

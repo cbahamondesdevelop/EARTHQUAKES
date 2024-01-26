@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     private lazy var homeView: HomeView = {
         let view = HomeView(viewModel: viewModel)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.delegate = self
         return view
     }()
     
@@ -48,5 +49,16 @@ extension HomeViewController {
             homeView.topAnchor.constraint(equalTo: view.topAnchor),
             homeView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+extension HomeViewController: HomeViewDelegate {
+    func didTapDetail(detail: FeaturesStruct) {
+        //let controller = EarthQuakesDetailViewController()
+        //navigationController?.pushViewController(controller, animated: true)
+        
+        let controller = EarthQuakesDetailViewController(viewModel: detail)
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true)
     }
 }
