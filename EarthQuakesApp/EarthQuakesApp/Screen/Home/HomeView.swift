@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomeViewDelegate: AnyObject {
     func didTapDetail(detail: FeaturesStruct)
+    func didTapSearchButton()
 }
 
 class HomeView: UIView {
@@ -21,10 +22,11 @@ class HomeView: UIView {
     private lazy var searchBarView: SearchHeaderView = {
         let view = SearchHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.delegate = self
         return view
     }()
     
-    private lazy var earthQuakeListView: EarthQuakeListView = {
+    lazy var earthQuakeListView: EarthQuakeListView = {
         let view = EarthQuakeListView(viewModel: viewModel)
         view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -66,5 +68,15 @@ extension HomeView {
 extension HomeView: EarthQuakeListViewDelegate {
     func didTapDetail(detail: FeaturesStruct) {
         delegate?.didTapDetail(detail: detail)
+    }
+}
+
+extension HomeView: SearchHeaderViewDelegate {
+    func searchBar(searchText: String) {
+        earthQuakeListView.search(searchText: searchText)
+    }
+    
+    func searchButton() {
+        delegate?.didTapSearchButton()
     }
 }

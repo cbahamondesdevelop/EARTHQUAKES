@@ -11,7 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     let textAPP = TextsInTheApp()
-    let provider = Provider()
+    let provider = Provider(initialDate: "2023-01-01", finalDate: "2023-01-02")
     
     private lazy var loginView: LoginView = {
         let view = LoginView()

@@ -83,7 +83,6 @@ extension CustomTableViewCell {
             
             locationLabel.topAnchor.constraint(equalTo: depthLabel.bottomAnchor, constant: 7),
             locationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            //locationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 7),
             
             detailButton.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             detailButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),

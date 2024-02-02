@@ -53,6 +53,13 @@ extension HomeViewController {
 }
 
 extension HomeViewController: HomeViewDelegate {
+    func didTapSearchButton() {
+        let controller = DateFilterViewController()
+        controller.delegate = self
+        controller.modalPresentationStyle = .pageSheet
+        self.present(controller, animated: true)
+    }
+    
     func didTapDetail(detail: FeaturesStruct) {
         //let controller = EarthQuakesDetailViewController()
         //navigationController?.pushViewController(controller, animated: true)
@@ -60,5 +67,29 @@ extension HomeViewController: HomeViewDelegate {
         let controller = EarthQuakesDetailViewController(viewModel: detail)
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true)
+    }
+}
+
+extension HomeViewController: DateFilterViewControllerDelegate {
+    func dateSelect(startDate: String, endDate: String) {
+        print("FECHA 1: \(startDate)")
+        print("FECHA 2: \(endDate)")
+        callServiceAgain(startDate: startDate, finalDate: endDate)
+    }
+    
+    func callServiceAgain(startDate: String, finalDate: String) {
+        let provider = Provider(initialDate: startDate, finalDate: finalDate)
+        
+        provider.fetchDataFromAPI { result in
+            switch result {
+            case .success(let response):
+                let view = HomeView(viewModel: response)
+                view.earthQuakeListView.viewModel = response
+                view.earthQuakeListView.filteredData = response.features
+                view.earthQuakeListView.earthTableView.reloadData()
+            case .failure(let error):
+                print("error \(error)")
+            }
+        }
     }
 }

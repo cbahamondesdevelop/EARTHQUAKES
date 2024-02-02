@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		515470642B6C1CCE00BBE586 /* DateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515470632B6C1CCE00BBE586 /* DateFilterView.swift */; };
+		515470662B6C246500BBE586 /* DateFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515470652B6C246500BBE586 /* DateFilterViewController.swift */; };
 		516406E72B45D0EC00A9803D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516406E62B45D0EC00A9803D /* LoginView.swift */; };
 		516406E92B45DEC800A9803D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516406E82B45DEC800A9803D /* LoginViewController.swift */; };
 		516406ED2B4DCB4300A9803D /* TextsInTheApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516406EC2B4DCB4300A9803D /* TextsInTheApp.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		515470632B6C1CCE00BBE586 /* DateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFilterView.swift; sourceTree = "<group>"; };
+		515470652B6C246500BBE586 /* DateFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFilterViewController.swift; sourceTree = "<group>"; };
 		516406E62B45D0EC00A9803D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		516406E82B45DEC800A9803D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		516406EC2B4DCB4300A9803D /* TextsInTheApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextsInTheApp.swift; sourceTree = "<group>"; };
@@ -106,10 +110,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		515470622B6C1CB100BBE586 /* DateFilter */ = {
+			isa = PBXGroup;
+			children = (
+				515470632B6C1CCE00BBE586 /* DateFilterView.swift */,
+				515470652B6C246500BBE586 /* DateFilterViewController.swift */,
+			);
+			path = DateFilter;
+			sourceTree = "<group>";
+		};
 		516406E32B45CFA300A9803D /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				516406F02B4F30C600A9803D /* DetailView */,
+				515470622B6C1CB100BBE586 /* DateFilter */,
+				516406F02B4F30C600A9803D /* Detail */,
 				516406EF2B4F2FB600A9803D /* RegisterUser */,
 				516406EE2B4F2FAD00A9803D /* Home */,
 				516406E52B45CFC800A9803D /* Login */,
@@ -165,13 +179,13 @@
 			path = RegisterUser;
 			sourceTree = "<group>";
 		};
-		516406F02B4F30C600A9803D /* DetailView */ = {
+		516406F02B4F30C600A9803D /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				5195F20F2B62D3F400032804 /* EarthQuakesDetailView.swift */,
 				5195F2112B62D7AF00032804 /* EarthQuakesDetailViewController.swift */,
 			);
-			path = DetailView;
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		516406F52B506AA400A9803D /* SubViews */ = {
@@ -390,6 +404,7 @@
 			files = (
 				51674F512B2DFA4F00A283FD /* ViewController.swift in Sources */,
 				516406F22B5028E500A9803D /* RegisterUserView.swift in Sources */,
+				515470642B6C1CCE00BBE586 /* DateFilterView.swift in Sources */,
 				5195F2102B62D3F400032804 /* EarthQuakesDetailView.swift in Sources */,
 				516407052B517EBA00A9803D /* Provider.swift in Sources */,
 				516406ED2B4DCB4300A9803D /* TextsInTheApp.swift in Sources */,
@@ -400,6 +415,7 @@
 				516406E72B45D0EC00A9803D /* LoginView.swift in Sources */,
 				516406FB2B506DEB00A9803D /* HomeViewController.swift in Sources */,
 				516406E92B45DEC800A9803D /* LoginViewController.swift in Sources */,
+				515470662B6C246500BBE586 /* DateFilterViewController.swift in Sources */,
 				516406FD2B507A9700A9803D /* CustomTableViewCell.swift in Sources */,
 				516406FF2B5084E000A9803D /* EarthQuakeListView.swift in Sources */,
 				51674F4F2B2DFA4F00A283FD /* SceneDelegate.swift in Sources */,
