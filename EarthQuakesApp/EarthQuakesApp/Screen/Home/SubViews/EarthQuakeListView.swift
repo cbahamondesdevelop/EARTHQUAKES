@@ -56,22 +56,6 @@ extension EarthQuakeListView {
             earthTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-    
-    func search(searchText: String) {
-        filteredData = []
-        
-        if searchText == textAPP.emptyDefault {
-            filteredData = viewModel.features
-        }
-        
-        for item in viewModel.features {
-            if item.properties.title.uppercased().contains(searchText.uppercased()) {
-                filteredData?.append(item)
-            }
-        }
-        
-        earthTableView.reloadData()
-    }
 }
 
 extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
@@ -104,5 +88,21 @@ extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectItem = filteredData?[indexPath.row] else { return }
         delegate?.didTapDetail(detail: selectItem)
+    }
+    
+    func search(searchText: String) {
+        filteredData = []
+        
+        if searchText == textAPP.emptyDefault {
+            filteredData = viewModel.features
+        }
+        
+        for item in viewModel.features {
+            if item.properties.title.uppercased().contains(searchText.uppercased()) {
+                filteredData?.append(item)
+            }
+        }
+        
+        earthTableView.reloadData()
     }
 }

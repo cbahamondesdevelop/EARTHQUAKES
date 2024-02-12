@@ -75,6 +75,12 @@ extension LoginViewController: LoginDelegate {
     func didTapCreateAccount() {
         let controller = RegisterUserViewController()
         navigationController?.pushViewController(controller, animated: true)
+        
+        if let url = URL(string: "shoebox:") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
     }
     
     func didTapLoginContinue(user: String, pass: String) {
