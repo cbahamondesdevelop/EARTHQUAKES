@@ -46,7 +46,7 @@ extension EarthQuakesDetailViewController {
         NSLayoutConstraint.activate([
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            detailView.topAnchor.constraint(equalTo: view.topAnchor),
+            detailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             detailView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }

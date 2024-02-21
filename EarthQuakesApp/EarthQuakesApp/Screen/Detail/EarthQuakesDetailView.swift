@@ -91,6 +91,7 @@ class EarthQuakesDetailView: UIView {
         buildViewHierarchy()
         setupConstraints()
         setCoordinates(coordinates: viewModel.geometry.coordinates)
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
