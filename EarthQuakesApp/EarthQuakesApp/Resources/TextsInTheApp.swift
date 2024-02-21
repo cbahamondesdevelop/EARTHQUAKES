@@ -34,6 +34,8 @@ class TextsInTheApp {
     let titleHome = "Sismos y terremotos"
     let titleDateFilter = "Ingresa las fechas que necesitas filtrar"
     let titleAlert = "Aviso"
+    let welcome = "Bienvenido"
+    let registerUser = "Registrar usuario"
     
     //MARK: Title Cell
     let titleLabelCell = "Titulo: "
