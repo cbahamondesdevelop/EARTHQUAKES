@@ -17,6 +17,15 @@ class RegisterUserView: UIView {
     let textAPP = TextsInTheApp()
     weak var delegate: RegisterUserViewDelegate?
     
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = textAPP.registerUser
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .boldSystemFont(ofSize: 18)
+        return label
+    }()
+    
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = textAPP.nameUser
@@ -119,7 +128,7 @@ class RegisterUserView: UIView {
     
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .systemMint
         button.layer.cornerRadius = 5.0
         button.isEnabled = true
         button.setTitle(textAPP.createAccount, for: .normal)
@@ -132,6 +141,7 @@ class RegisterUserView: UIView {
         super.init(frame: frame)
         buildViewHierarchy()
         setupConstraints()
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -143,7 +153,8 @@ class RegisterUserView: UIView {
 extension RegisterUserView {
     
     private func buildViewHierarchy() {
-        [nameLabel,
+        [titleLabel,
+         nameLabel,
          nameTextField,
          lastNameLabel,
          lastNameTextField,
@@ -158,7 +169,11 @@ extension RegisterUserView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            
+            nameLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
                         
             nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),

@@ -26,7 +26,7 @@ class RegisterUserViewController: UIViewController {
 
 extension RegisterUserViewController {
     func buildViewHierarchy() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemMint
         view.addSubview(registerUserView)
     }
     
@@ -34,7 +34,7 @@ extension RegisterUserViewController {
         NSLayoutConstraint.activate([
             registerUserView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             registerUserView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            registerUserView.topAnchor.constraint(equalTo: view.topAnchor),
+            registerUserView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             registerUserView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }

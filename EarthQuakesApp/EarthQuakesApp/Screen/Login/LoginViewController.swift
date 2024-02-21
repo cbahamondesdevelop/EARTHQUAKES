@@ -11,7 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     let textAPP = TextsInTheApp()
-    let provider = Provider()
+    let provider = Provider(initialDate: "2023-01-01", finalDate: "2023-01-02")
     
     private lazy var loginView: LoginView = {
         let view = LoginView()
@@ -57,7 +57,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     func buildViewHierarchy() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemMint
         view.addSubview(loginView)
     }
     
@@ -65,7 +65,7 @@ extension LoginViewController {
         NSLayoutConstraint.activate([
             loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            loginView.topAnchor.constraint(equalTo: view.topAnchor),
+            loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -75,6 +75,12 @@ extension LoginViewController: LoginDelegate {
     func didTapCreateAccount() {
         let controller = RegisterUserViewController()
         navigationController?.pushViewController(controller, animated: true)
+        /*
+        if let url = URL(string: "shoebox:") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }*/
     }
     
     func didTapLoginContinue(user: String, pass: String) {

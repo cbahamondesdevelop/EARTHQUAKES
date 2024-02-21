@@ -15,10 +15,11 @@ protocol EarthQuakeListViewDelegate: AnyObject {
 class EarthQuakeListView: UIView {
     
     let textAPP = TextsInTheApp()
-    let viewModel: EarthquakeDataResponse
+    var viewModel: EarthquakeDataResponse
+    var filteredData: [FeaturesStruct]?
     weak var delegate: EarthQuakeListViewDelegate?
     
-    private lazy var earthTableView: UITableView = {
+    lazy var earthTableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
@@ -36,6 +37,7 @@ class EarthQuakeListView: UIView {
         buildViewHierarchy()
         setupConstraints()
         
+        filteredData = viewModel.features
         earthTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "myCustomCell")
     }
 }
@@ -58,7 +60,7 @@ extension EarthQuakeListView {
 
 extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.features.count
+        return filteredData?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -70,12 +72,12 @@ extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
             fatalError("Error in TableView")
         }
         
-        let earthquake = viewModel.features[indexPath.row]
+        let earthquake = filteredData?[indexPath.row]
         cell.titleLabel.text = textAPP.titleLabelCell
-        cell.subTitleLabel.text = earthquake.properties.title
-        cell.magnitudeLabel.text = "\(textAPP.magnitudeLabelCell)\(earthquake.properties.mag ?? 0)"
-        cell.depthLabel.text = "\(textAPP.depthLabelCell)\(earthquake.geometry.coordinates[2])"
-        cell.locationLabel.text = "\(textAPP.locationLabelCell)\(earthquake.properties.place ?? textAPP.emptyLocation)"
+        cell.subTitleLabel.text = earthquake?.properties.title ?? textAPP.emptyDefault
+        cell.magnitudeLabel.text = "\(textAPP.magnitudeLabelCell)\(earthquake?.properties.mag ?? 0)"
+        cell.depthLabel.text = "\(textAPP.depthLabelCell)\(String(describing: earthquake?.geometry.coordinates[2]))"
+        cell.locationLabel.text = "\(textAPP.locationLabelCell)\(earthquake?.properties.place ?? textAPP.emptyLocation)"
         
         cell.detailButton.setTitle(textAPP.detailButton, for: .normal)
         cell.detailButton.setTitleColor(.systemBlue, for: .normal)
@@ -84,7 +86,23 @@ extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectItem = viewModel.features[indexPath.row]
+        guard let selectItem = filteredData?[indexPath.row] else { return }
         delegate?.didTapDetail(detail: selectItem)
+    }
+    
+    func search(searchText: String) {
+        filteredData = []
+        
+        if searchText == textAPP.emptyDefault {
+            filteredData = viewModel.features
+        }
+        
+        for item in viewModel.features {
+            if item.properties.title.uppercased().contains(searchText.uppercased()) {
+                filteredData?.append(item)
+            }
+        }
+        
+        earthTableView.reloadData()
     }
 }

@@ -11,13 +11,22 @@ import Alamofire
 final class Provider {
     
     static let shared = Provider()
+    let textAPP = TextsInTheApp()
     
-    private let URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2023-01-01&endtime=2023-01-02"
-    private let statusOK = 200...299
+    private var initialDate: String?
+    private var finalDate: String?
+    
+    func getURL() -> String {
+        guard let startDate = initialDate else { return textAPP.initialDateDefault }
+        guard let endDate = finalDate else { return textAPP.finalDateDefault }
+        
+        let URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=\(startDate)&endtime=\(endDate)"
+        return URL
+    }
     
     func fetchDataFromAPI(completion: @escaping (Result<EarthquakeDataResponse, Error>) -> Void) {
         
-        AF.request(URL, method: .get)
+        AF.request(getURL(), method: .get)
             .validate()
             .responseDecodable(of: EarthquakeDataResponse.self) { response in
                 switch response.result {
@@ -27,5 +36,10 @@ final class Provider {
                     completion(.failure(error))
                 }
             }
+    }
+    
+    init(initialDate: String? = nil, finalDate: String? = nil) {
+        self.initialDate = initialDate
+        self.finalDate = finalDate
     }
 }

@@ -18,6 +18,15 @@ class LoginView: UIView {
     let textAPP = TextsInTheApp()
     weak var delegate: LoginDelegate?
     
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = textAPP.welcome
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .boldSystemFont(ofSize: 18)
+        return label
+    }()
+    
     private lazy var userLabel: UILabel = {
         let label = UILabel()
         label.text = textAPP.nameUser
@@ -70,7 +79,7 @@ class LoginView: UIView {
     
     private lazy var loginButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .systemMint
         button.layer.cornerRadius = 5.0
         button.isEnabled = true
         button.setTitle(textAPP.titleButton, for: .normal)
@@ -83,6 +92,7 @@ class LoginView: UIView {
         super.init(frame: frame)
         buildViewHierarchy()
         setupConstraints()
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -94,12 +104,16 @@ class LoginView: UIView {
 extension LoginView {
     
     private func buildViewHierarchy() {
-        [userLabel, userTextField, passwordLabel, passwordTextField, registerButton, loginButton].forEach(addSubview)
+        [titleLabel, userLabel, userTextField, passwordLabel, passwordTextField, registerButton, loginButton].forEach(addSubview)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            userLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            
+            userLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             userLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
                         
             userTextField.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: 10),
