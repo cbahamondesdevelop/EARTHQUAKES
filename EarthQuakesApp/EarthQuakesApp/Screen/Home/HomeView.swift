@@ -38,6 +38,7 @@ class HomeView: UIView {
         super.init(frame: .zero)
         buildViewHierarchy()
         setupConstraints()
+        backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {

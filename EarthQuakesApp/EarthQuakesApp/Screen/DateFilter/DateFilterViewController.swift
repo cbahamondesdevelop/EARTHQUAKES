@@ -33,7 +33,7 @@ class DateFilterViewController: UIViewController {
 
 extension DateFilterViewController {
     func buildViewHierarchy() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemMint
         view.addSubview(dateFilterView)
     }
     
@@ -41,7 +41,7 @@ extension DateFilterViewController {
         NSLayoutConstraint.activate([
             dateFilterView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             dateFilterView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dateFilterView.topAnchor.constraint(equalTo: view.topAnchor),
+            dateFilterView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             dateFilterView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }

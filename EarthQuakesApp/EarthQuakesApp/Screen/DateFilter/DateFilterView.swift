@@ -78,7 +78,7 @@ class DateFilterView: UIView {
     
     private lazy var applyButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .systemMint
         button.layer.cornerRadius = 5.0
         button.isEnabled = true
         button.setTitle(textAPP.applyFilter, for: .normal)
@@ -92,6 +92,7 @@ class DateFilterView: UIView {
         buildViewHierarchy()
         setupConstraints()
         //setPicker()
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
