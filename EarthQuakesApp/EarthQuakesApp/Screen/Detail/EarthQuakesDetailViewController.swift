@@ -24,6 +24,7 @@ class EarthQuakesDetailViewController: UIViewController {
         super.viewDidLoad()
         buildViewHierarchy()
         setupConstraints()
+        overrideUserInterfaceStyle = .light
     }
     
     init(viewModel: FeaturesStruct) {

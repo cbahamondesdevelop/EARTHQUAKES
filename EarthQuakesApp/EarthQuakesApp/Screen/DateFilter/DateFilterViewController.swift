@@ -28,6 +28,7 @@ class DateFilterViewController: UIViewController {
         super.viewDidLoad()
         buildViewHierarchy()
         setupConstraints()
+        overrideUserInterfaceStyle = .light
     }
 }
 

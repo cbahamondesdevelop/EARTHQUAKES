@@ -88,6 +88,14 @@ class LoginView: UIView {
         return button
     }()
     
+    private lazy var spinnerView: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.style = .large
+        spinner.center = self.center
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildViewHierarchy()
@@ -104,7 +112,7 @@ class LoginView: UIView {
 extension LoginView {
     
     private func buildViewHierarchy() {
-        [titleLabel, userLabel, userTextField, passwordLabel, passwordTextField, registerButton, loginButton].forEach(addSubview)
+        [titleLabel, userLabel, userTextField, passwordLabel, passwordTextField, registerButton, loginButton, spinnerView].forEach(addSubview)
     }
     
     private func setupConstraints() {
@@ -134,7 +142,10 @@ extension LoginView {
             loginButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -60),
             loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             loginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            loginButton.heightAnchor.constraint(equalToConstant: 40)
+            loginButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            spinnerView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            spinnerView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }
@@ -142,6 +153,7 @@ extension LoginView {
 extension LoginView {
     @objc
     func didTapLogin() {
+        spinnerView.startAnimating()
         guard let user = userTextField.text else { return }
         guard let pass = passwordTextField.text else { return }
         
