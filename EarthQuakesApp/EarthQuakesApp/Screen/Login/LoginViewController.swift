@@ -24,13 +24,16 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         buildViewHierarchy()
         setupConstraints()
+        overrideUserInterfaceStyle = .light
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(myDismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     func makeLogin(user: String, password: String) {
-        let fakeUser = "Cristian"
-        let fakePass = "1234"
-        
-        if user == fakeUser && password == fakePass {
+        let userOK = validateUser(name: user, inPass: password)
+        if userOK {
             
             provider.fetchDataFromAPI { result in
                 switch result {
@@ -49,9 +52,56 @@ class LoginViewController: UIViewController {
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: textAPP.titleAlert, message: textAPP.alertContent, preferredStyle: .alert)
+        let alert = UIAlertController(title: textAPP.titleAlert, message: textAPP.alertUserOrPass, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: textAPP.iAgree, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert,animated: true, completion: nil)
+    }
+    
+    func validateUser(name: String, inPass: String) -> Bool {
+        let decoder = JSONDecoder()
+        
+        if let userData = UserDefaults.standard.object(forKey: "userRegister") as? Data {
+            do {
+                let user = try decoder.decode(UserAppModel.self, from: userData)
+                if name == user.name && inPass == user.password {
+                    return true
+                } else {
+                    return false
+                }
+            } catch {
+                print("Error")
+                return false
+            }
+        } else {
+            print("No existe data")
+            return false
+        }
+    }
+    
+    func userExists() -> Bool {
+        let decoder = JSONDecoder()
+        
+        if let userData = UserDefaults.standard.object(forKey: "userRegister") as? Data {
+            do {
+                let user = try decoder.decode(UserAppModel.self, from: userData)
+                if user.name != textAPP.emptyDefault {
+                    return true
+                } else {
+                    return false
+                }
+            } catch {
+                print("Error")
+                return false
+            }
+        } else {
+            print("No existe data")
+            return false
+        }
+    }
+    
+    @objc
+    func myDismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
@@ -73,8 +123,14 @@ extension LoginViewController {
 
 extension LoginViewController: LoginDelegate {
     func didTapCreateAccount() {
-        let controller = RegisterUserViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        
+        if userExists() {
+            let controller = PreRegisterViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        } else {
+            let controller = RegisterUserViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }
         /*
         if let url = URL(string: "shoebox:") {
             if UIApplication.shared.canOpenURL(url) {

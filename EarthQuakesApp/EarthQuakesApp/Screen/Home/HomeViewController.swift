@@ -23,6 +23,11 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         buildViewHierarchy()
         setupConstraints()
+        overrideUserInterfaceStyle = .light
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(myDismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     init(viewModel: EarthquakeDataResponse) {
@@ -33,6 +38,11 @@ class HomeViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc
+    func myDismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

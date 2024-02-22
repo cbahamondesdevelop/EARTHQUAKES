@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol RegisterUserViewDelegate: AnyObject {
-    func didTapCreateAccount()
+    func didTapCreateAccount(userData: UserAppModel)
 }
 
 class RegisterUserView: UIView {
@@ -83,6 +83,7 @@ class RegisterUserView: UIView {
         textField.layer.cornerRadius = 8.0
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor.black.cgColor
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -103,6 +104,7 @@ class RegisterUserView: UIView {
         textField.layer.cornerRadius = 8.0
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor.black.cgColor
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -219,6 +221,19 @@ extension RegisterUserView {
 extension RegisterUserView {
     @objc
     func didTapRegister(){
-        delegate?.didTapCreateAccount()
+        
+        guard let name = nameTextField.text else { return }
+        guard let lastName = lastNameTextField.text else { return }
+        guard let pass = passwordTextField.text else { return }
+        guard let repeatPass = repeatPassTextField.text else { return }
+        guard let email = emailTextField.text else { return }
+        
+        let data = UserAppModel(name: name, 
+                                lastName: lastName,
+                                password: pass,
+                                repeatPassword: repeatPass,
+                                email: email)
+        
+        delegate?.didTapCreateAccount(userData: data)
     }
 }

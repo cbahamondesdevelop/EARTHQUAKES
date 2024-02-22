@@ -17,7 +17,8 @@ class TextsInTheApp {
     let lastName = "Apellido"
     let email = "E-Mail"
     let search = "Buscar"
-    let alertContent = "Usuario o contraseña no coinciden"
+    let alertUserOrPass = "Usuario o contraseña no coinciden"
+    let alertPass = "Contraseña no coincide"
     let iAgree = "De acuerdo"
     let emptyLocation = "No reportado"
     let startDate = "Fecha inicio"
@@ -29,6 +30,8 @@ class TextsInTheApp {
     let createAccount = "Crear cuenta"
     let detailButton = "Ver detalle"
     let applyFilter = "Aplicar filtro"
+    let deleteAndCreateNewUser = "Borrar actual y crear nuevo usuario"
+    let useExisting = "Utilizar usuario existente"
     
     //MARK: Title
     let titleHome = "Sismos y terremotos"
@@ -36,6 +39,7 @@ class TextsInTheApp {
     let titleAlert = "Aviso"
     let welcome = "Bienvenido"
     let registerUser = "Registrar usuario"
+    let infoRegister = "Esta APP ya cuenta con un usuario creado"
     
     //MARK: Title Cell
     let titleLabelCell = "Titulo: "
