@@ -88,7 +88,7 @@ class LoginView: UIView {
         return button
     }()
     
-    private lazy var spinnerView: UIActivityIndicatorView = {
+    lazy var spinnerView: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         spinner.style = .large
         spinner.center = self.center

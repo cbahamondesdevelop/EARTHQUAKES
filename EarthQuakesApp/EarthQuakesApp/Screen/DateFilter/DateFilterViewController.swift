@@ -23,7 +23,7 @@ class DateFilterViewController: UIViewController {
         view.delegate = self
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         buildViewHierarchy()

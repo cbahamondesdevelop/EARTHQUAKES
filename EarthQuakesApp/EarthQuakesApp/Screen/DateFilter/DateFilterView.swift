@@ -16,6 +16,8 @@ class DateFilterView: UIView {
     
     let textAPP = TextsInTheApp()
     weak var delegate: DateFilterViewDelegate?
+    private var startDate: String?
+    private var endDate: String?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -35,13 +37,12 @@ class DateFilterView: UIView {
         return label
     }()
     
-    private lazy var startDateTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.textAlignment = .right
-        textField.placeholder = textAPP.selectADate
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
+    private lazy var startDatePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.addTarget(self, action: #selector(startDatePickerValueChanged), for: .valueChanged)
+        return datePicker
     }()
     
     private lazy var endDateLabel: UILabel = {
@@ -52,29 +53,14 @@ class DateFilterView: UIView {
         label.font = .boldSystemFont(ofSize: 16.0)
         return label
     }()
-    
-    private lazy var endDateTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.textAlignment = .right
-        textField.placeholder = textAPP.selectADate
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    /*
-    private lazy var startDatePicker: UIDatePicker = {
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
-        return datePicker
-    }()
-    
+
     private lazy var endDatePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.addTarget(self, action: #selector(endDatePickerValueChanged), for: .valueChanged)
         return datePicker
-    }()*/
+    }()
     
     private lazy var applyButton: UIButton = {
         let button = UIButton()
@@ -91,29 +77,19 @@ class DateFilterView: UIView {
         super.init(frame: frame)
         buildViewHierarchy()
         setupConstraints()
-        //setPicker()
         backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
-    func setPicker() {
-        let toolbar = UIToolbar()
-        let doneButton = UIBarButtonItem(title: "Listo", style: .done, target: self, action: #selector(doneButtonTapped))
-        toolbar.items = [doneButton]
-        startDateTextField.inputAccessoryView = toolbar
-        endDateTextField.inputAccessoryView = toolbar
-        startDateTextField.inputView = startDatePicker
-        endDateTextField.inputView = endDatePicker
-    }*/
+
 }
 
 extension DateFilterView {
     
     private func buildViewHierarchy() {
-        [titleLabel, startDateLabel, startDateTextField, endDateLabel, endDateTextField, applyButton].forEach(addSubview)
+        [titleLabel, startDateLabel, startDatePicker, endDateLabel, endDatePicker, applyButton].forEach(addSubview)
     }
     
     private func setupConstraints() {
@@ -125,16 +101,14 @@ extension DateFilterView {
             startDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             startDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
-            startDateTextField.topAnchor.constraint(equalTo: startDateLabel.bottomAnchor, constant: 10),
-            startDateTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            startDateTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            startDatePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            startDatePicker.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            endDateLabel.topAnchor.constraint(equalTo: startDateTextField.bottomAnchor, constant: 20),
+            endDateLabel.topAnchor.constraint(equalTo: startDateLabel.bottomAnchor, constant: 40),
             endDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
-            endDateTextField.topAnchor.constraint(equalTo: endDateLabel.bottomAnchor, constant: 10),
-            endDateTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            endDateTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            endDatePicker.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 20),
+            endDatePicker.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
             applyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -60),
             applyButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -147,26 +121,26 @@ extension DateFilterView {
 extension DateFilterView {
     @objc
     func tapApplyButton() {
-        //let startDate = startDatePicker.date
-        //let endDate = endDatePicker.date
-        //print("presione apply button \(startDate) \(endDate)")
-        
-        guard let startDate = startDateTextField.text else { return }
-        guard let endDate = endDateTextField.text else { return }
-        //let dateFormatter = DateFormatter()
-        
-        //dateFormatter.dateFormat = "dd-MM-yyyy"
-
-        //guard let initialDate = dateFormatter.date(from: startDate) else { return }
-        //guard let finalDate = dateFormatter.date(from: endDate) else { return }
-        
-        delegate?.tapApplyFilter(startDate: startDate, endDate: endDate)
+        let stDate = startDate ?? textAPP.initialDateDefault
+        let enDate = endDate ?? textAPP.finalDateDefault
+ 
+        delegate?.tapApplyFilter(startDate: stDate, endDate: enDate)
+    }
+    
+    @objc 
+    private func startDatePickerValueChanged() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.string(from: startDatePicker.date)
+        startDate = date
     }
     
     @objc
-    private func doneButtonTapped() {
-        startDateTextField.resignFirstResponder()
-        endDateTextField.resignFirstResponder()
+    private func endDatePickerValueChanged() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.string(from: endDatePicker.date)
+        endDate = date
     }
 }
 
