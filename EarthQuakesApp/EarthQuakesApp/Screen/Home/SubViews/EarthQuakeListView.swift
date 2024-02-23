@@ -22,8 +22,6 @@ class EarthQuakeListView: UIView {
     lazy var earthTableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.dataSource = self
-        table.delegate = self
         return table
     }()
 
@@ -55,54 +53,5 @@ extension EarthQuakeListView {
             earthTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             earthTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-    }
-}
-
-extension EarthQuakeListView: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredData?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150.0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = earthTableView.dequeueReusableCell(withIdentifier: "myCustomCell", for: indexPath) as? CustomTableViewCell else {
-            fatalError("Error in TableView")
-        }
-        
-        let earthquake = filteredData?[indexPath.row]
-        cell.titleLabel.text = textAPP.titleLabelCell
-        cell.subTitleLabel.text = earthquake?.properties.title ?? textAPP.emptyDefault
-        cell.magnitudeLabel.text = "\(textAPP.magnitudeLabelCell)\(earthquake?.properties.mag ?? 0)"
-        cell.depthLabel.text = "\(textAPP.depthLabelCell)\(String(describing: earthquake?.geometry.coordinates[2]))"
-        cell.locationLabel.text = "\(textAPP.locationLabelCell)\(earthquake?.properties.place ?? textAPP.emptyLocation)"
-        
-        cell.detailButton.setTitle(textAPP.detailButton, for: .normal)
-        cell.detailButton.setTitleColor(.systemBlue, for: .normal)
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let selectItem = filteredData?[indexPath.row] else { return }
-        delegate?.didTapDetail(detail: selectItem)
-    }
-    
-    func search(searchText: String) {
-        filteredData = []
-        
-        if searchText == textAPP.emptyDefault {
-            filteredData = viewModel.features
-        }
-        
-        for item in viewModel.features {
-            if item.properties.title.uppercased().contains(searchText.uppercased()) {
-                filteredData?.append(item)
-            }
-        }
-        
-        earthTableView.reloadData()
     }
 }

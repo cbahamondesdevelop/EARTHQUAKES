@@ -47,6 +47,7 @@ class LoginViewController: UIViewController {
             }
             
         } else {
+            loginView.spinnerView.stopAnimating()
             showAlert()
         }
     }

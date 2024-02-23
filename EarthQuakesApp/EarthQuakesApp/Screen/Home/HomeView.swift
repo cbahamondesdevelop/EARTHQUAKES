@@ -11,6 +11,7 @@ import UIKit
 protocol HomeViewDelegate: AnyObject {
     func didTapDetail(detail: FeaturesStruct)
     func didTapSearchButton()
+    func didSearch(searchText: String)
 }
 
 class HomeView: UIView {
@@ -74,7 +75,7 @@ extension HomeView: EarthQuakeListViewDelegate {
 
 extension HomeView: SearchHeaderViewDelegate {
     func searchBar(searchText: String) {
-        earthQuakeListView.search(searchText: searchText)
+        delegate?.didSearch(searchText: searchText)
     }
     
     func searchButton() {
