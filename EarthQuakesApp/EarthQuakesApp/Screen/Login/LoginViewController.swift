@@ -38,6 +38,7 @@ class LoginViewController: UIViewController {
             provider.fetchDataFromAPI { result in
                 switch result {
                 case .success(let response):
+                    self.loginView.spinnerView.stopAnimating()
                     let controller = HomeViewController(viewModel: response)
                     controller.modalPresentationStyle = .fullScreen
                     self.present(controller, animated: true)
@@ -132,12 +133,6 @@ extension LoginViewController: LoginDelegate {
             let controller = RegisterUserViewController()
             navigationController?.pushViewController(controller, animated: true)
         }
-        /*
-        if let url = URL(string: "shoebox:") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }*/
     }
     
     func didTapLoginContinue(user: String, pass: String) {

@@ -11,6 +11,7 @@ import UIKit
 protocol SearchHeaderViewDelegate: AnyObject {
     func searchBar(searchText: String)
     func searchButton()
+    func logoutButton()
 }
 
 class SearchHeaderView: UIView {
@@ -44,6 +45,15 @@ class SearchHeaderView: UIView {
         return button
     }()
     
+    private lazy var logoutButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "logout"), for: .normal)
+        //button.tintColor = .systemBlue
+        button.addTarget(self, action: #selector(tapLogoutButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildViewHierarchy()
@@ -59,7 +69,7 @@ class SearchHeaderView: UIView {
 extension SearchHeaderView {
     
     private func buildViewHierarchy() {
-        [titleLabel, searchBar, searchButton].forEach(addSubview)
+        [titleLabel, searchBar, searchButton, logoutButton].forEach(addSubview)
     }
     
     private func setupConstraints() {
@@ -76,7 +86,12 @@ extension SearchHeaderView {
             searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             searchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            
+            logoutButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+            logoutButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            logoutButton.widthAnchor.constraint(equalToConstant: 20),
+            logoutButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
 }
@@ -89,5 +104,12 @@ extension SearchHeaderView: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         delegate?.searchBar(searchText: searchText)
+    }
+}
+
+extension SearchHeaderView {
+    @objc
+    func tapLogoutButton() {
+        delegate?.logoutButton()
     }
 }
