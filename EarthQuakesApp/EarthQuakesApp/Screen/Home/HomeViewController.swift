@@ -66,6 +66,10 @@ extension HomeViewController {
 }
 
 extension HomeViewController: HomeViewDelegate {
+    func didLogout() {
+        self.dismiss(animated: true)
+    }
+    
     func didSearch(searchText: String) {
         search(searchText: searchText)
     }

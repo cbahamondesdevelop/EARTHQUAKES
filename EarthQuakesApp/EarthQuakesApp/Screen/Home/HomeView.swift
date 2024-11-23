@@ -12,6 +12,7 @@ protocol HomeViewDelegate: AnyObject {
     func didTapDetail(detail: FeaturesStruct)
     func didTapSearchButton()
     func didSearch(searchText: String)
+    func didLogout()
 }
 
 class HomeView: UIView {
@@ -74,6 +75,10 @@ extension HomeView: EarthQuakeListViewDelegate {
 }
 
 extension HomeView: SearchHeaderViewDelegate {
+    func logoutButton() {
+        delegate?.didLogout()
+    }
+    
     func searchBar(searchText: String) {
         delegate?.didSearch(searchText: searchText)
     }
