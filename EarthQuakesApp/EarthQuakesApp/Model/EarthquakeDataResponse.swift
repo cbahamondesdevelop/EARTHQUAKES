@@ -11,7 +11,7 @@ struct EarthquakeDataResponse: Decodable {
     var type: String
     var metadata: MetadataStruct
     var features: [FeaturesStruct]
-    var bbox: [Double]
+    var bbox: [Double]?
 }
 
 struct MetadataStruct: Decodable {
