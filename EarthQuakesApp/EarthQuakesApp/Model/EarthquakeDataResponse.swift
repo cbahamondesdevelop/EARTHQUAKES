@@ -52,7 +52,7 @@ struct PropertiesStruct: Decodable {
     var types: String
     var nst: Int?
     var dmin: Double?
-    var rms: Double
+    var rms: Double?
     var gap: Double?
     var magType: String?
     var type: String
